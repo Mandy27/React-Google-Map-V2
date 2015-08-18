@@ -1,4 +1,25 @@
 /** @jsx React.DOM */
+var carArr = [{
+		id: 1,
+		coords: { lat: 32.867881, lng: -117.22 },
+		options: { visible: true}
+	},
+	{
+		id: 2,
+		coords: { lat: 32.868, lng: -117.23 },
+		options: { visible: true }
+	},
+	{
+		id: 3,
+		coords: { lat: 32.87, lng: -117.21 },
+		options: { visible: true }
+	},
+	{
+		id: 4,
+		coords: { lat: 32.869, lng: -117.21 },
+		options: { visible: true }
+	}];
+
 var CarList = React.createClass({
 	getInitialState: function(){
 		return {
@@ -31,13 +52,34 @@ var Gmap = React.createClass({
     		center: {lat: 32.867881, lng: -117.212951},
     		zoom: 14
   		});
+  		var markers = [];
+  		carArr.forEach(function(item){
+			var marker = new google.maps.Marker({
+				id: item.id,
+    			position: item.coords,
+    			options: item.options,
+    			map: map,
+  			});
+  			markers.push(marker);
+		});
   		return {
-  			gmap: map
+  			gmap: map,
+  			markers: markers
   		};
 	},
+	moveMarkers: function(){
+		setInterval(function(){
+			console.log("Hello");
+		}, 1000);
+	},
   	render: function() {
+  		var cx = React.addons.classSet;
+  		var classes = cx({
+  			'gmap': this.state.gmap,
+  			'markersMove': this.moveMarkers()
+  		});
   		return (
-  			<div className={this.state.gmap}></div>
+  			<div className={classes}></div>
   		);
   	}
 });
