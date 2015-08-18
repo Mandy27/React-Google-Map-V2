@@ -20,6 +20,7 @@ var carArr = [{
 		options: { visible: true }
 	}];
 
+// Create Dropdown component
 var CarList = React.createClass({
 	getInitialState: function(){
 		return {
@@ -45,6 +46,7 @@ var CarList = React.createClass({
   	}
 });
 
+//Create Google map component
 var Gmap = React.createClass({
 	getInitialState: function(){
 		var map;
@@ -68,9 +70,21 @@ var Gmap = React.createClass({
   		};
 	},
 	moveMarkers: function(){
-		setInterval(function(){
-			console.log("Hello");
-		}, 1000);
+		var markers = this.state.markers;
+		var move = function(markers){
+			 for(var i = 0; i < markers.length; i++){
+		     	var l = markers[i].getPosition().lat() + (Math.random() * (0.002 - 0.0001) + 0.0001) - 0.001;
+		     	var lo = markers[i].getPosition().lng()+ (Math.random() * (0.002 - 0.0001) + 0.0001) - 0.001;
+			    markers[i].setPosition(new google.maps.LatLng(l, lo));
+     		}
+		}
+		var helper = function(markers){
+			return function(){
+				move(markers);
+			}
+		}
+
+		setInterval(helper(markers), 1000);
 	},
   	render: function() {
   		var cx = React.addons.classSet;
@@ -83,7 +97,6 @@ var Gmap = React.createClass({
   		);
   	}
 });
-
 
 React.render(<Gmap/>,document.getElementById("myMap"));
 React.render(<CarList/>,document.getElementById("carList"));
