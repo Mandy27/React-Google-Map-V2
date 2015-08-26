@@ -1,15 +1,8 @@
-#myMap{
-	height: 740px; 
+.myMap{
+	height: 450px;
 	z-index: 1;
 }
 body{
 	text-align: center;
 }
-#carList{
-	position: absolute;
-	display: inline-block;
-	background-color: #FFFFFF;
-	padding: 0.5em;
-	margin-top: 0.5em;
-	z-index: 2;
-}
+
