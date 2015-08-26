@@ -7,8 +7,12 @@ var Table = React.createClass({
 		var rows = this.props.rows.map(function(item){
 			return <Row value={item}/>;
 		});
+		var style = {
+			border: '1px solid black',
+			'margin-top': '2em'
+		};
 		return (
-			<table>
+			<table style={style}>
 				<tr>
 			    	{headers}
 			  	</tr>
